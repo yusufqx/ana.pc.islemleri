@@ -4,13 +4,13 @@ print("UYGULAMALARDA GEZİNMEK İÇİN ÖNCELİKLE UYGULAMA AÇMANIZ GEREKİYOR"
 
 class bilgisayar():
 
-    def __init__(self,durum="kapalı",ses_ayar=0,anasayfa="ana sayfa",anasayfa_durum=["ana sayfa","spotify","google"],komut="arama yeri",uygulamalar=[]):
+    def __init__(self,durum="kapalı",ses_ayar=0,anasayfa=["ana sayfa","spotify","google"],komut="arama yeri",uygulamalar=["google","spotify"]):
         self.durum=durum
         self.ses_ayar=ses_ayar
         self.anasayfa=anasayfa
-        self.anasayfa_durum=anasayfa_durum
         self.komut=komut
         self.uygulamalar=uygulamalar
+
     def pc_ac(self):
         if self.durum=="açık":
             print("bilgisayar zaten açık")
@@ -25,6 +25,7 @@ class bilgisayar():
             print("bilgisayarınız kapanıyor..")
             time.sleep(0.2)
             self.durum="kapalı"
+
     def ses_ac_kıs(self):
         while True:
             sesaç=input("> ses yükseltir, < ses kısar \n kaydedip çıkmak için 'q' tuşuna basın")
@@ -39,30 +40,38 @@ class bilgisayar():
             elif sesaç=="q":
                 print("güncel ses: ",self.ses_ayar)
                 break
-    def ana_sayfa(self):
+            else:
+                print("geçersiz işlem")
+                break
+    def zaten_anasayfa(self):
         if self.anasayfa=="ana sayfa":
-            print("zaten ana sayfadasınız..")
-        else:
+            print("zaten ana sayfadasınız")
+    def ana_sayfa(self):
+        if self.anasayfa=="google":
             print("ana sayfaya geçiliyor..")
-            self.anasayfa=self.anasayfa="ana sayfa"
+            self.anasayfa="ana sayfa"
             print("ana sayfaya geçiş yapıldı...")
+        elif self.anasayfa=="spotify":
+            print("ana sayfaya geçiş yapılıyor..")
+            self.anasayfa="ana sayfa"
+            print("ana sayfaya geçiş yapıldı..")
+        else:
+            print("zaten ana sayfadasınız")
     def uygulamalarx(self):
-        uygulama1="spotify"
-        uygulama2="google"
-        soru=input("hangi işlemi yapmak istiyorsunuz :\n uygulamaya girmek için 1:\nuygulamaları görmek için: 2")
+
+        soru=input("hangi işlemi yapmak istiyorsunuz :\n uygulamaya girmek için : 1    \nuygulamaları görmek için: 2 \n  ")
         if soru=="1":
-            uyg_soru=input("hangi uygulamaya geçmek istiyorsunuz.? ")
+            uyg_soru=input("hangi uygulamaya girmek istiyorsunuz.?:   ")
             if uyg_soru=="spotify":
-                self.uygulamalar.append("spotify")
-                self.uygulamalar="spotify"
                 print("spotify uygulamasına giriş yaptınız")
+                self.anasayfa="spotify"
             elif uyg_soru=="google":
-                self.uygulamalar.append("google")
-                self.uygulamalar="google"
                 print("google uygulamasına giriş yaptınız")
+                self.anasayfa="google"
         elif soru=="2":
-            print(self.uygulamalar)
+                print(self.uygulamalar)
     def komutx(self):
+
         print("şuanda arama kısmındasınız")
         print("burada bu bilgisayar programındaki şeyleri aratabilirsiniz")
         print("belirli komutlar vardır bunlar şunlardır:\n bilgisayarı kapatmak için: kapat\n bilgisayarı açmak için: aç\n sesi açmak için veya kısmak için: ses\n ana sayfaya gelmek için ana sayfa\n uygulama açmak ve gezinmek için uygulamalar yazmanız gerek")
@@ -78,7 +87,9 @@ class bilgisayar():
         elif arat=="uygulamalar":
             self.uygulamalarx()
 
+
 bilgisayar1=bilgisayar()
+
 
 print("""Bilgisayar Uygulaması
 Bilgisayarı Açmak İçin : 1
@@ -89,6 +100,7 @@ Bilgisayarda Uygulama Değiştirmek İçin: 5
 Bilgisayarda Komut İşlemi Yapmak için : 6
 
 """)
+
 while True:
     işlem=input("İşleminizi Seçin")
     if işlem=="1":
@@ -96,13 +108,16 @@ while True:
     elif işlem=="2":
         bilgisayar1.pc_kapa()
     elif işlem=="3":
+        print("güncel ses: ",bilgisayar1.ses_ayar)
         bilgisayar1.ses_ac_kıs()
     elif işlem=="4":
-        print("ana sayfadasınız..")
         bilgisayar1.ana_sayfa()
     elif işlem=="5":
         bilgisayar1.uygulamalarx()
     elif işlem=="6":
         bilgisayar1.komutx()
+    elif işlem=="q":
+        break
     else:
         print("geçersiz işlem")
+
